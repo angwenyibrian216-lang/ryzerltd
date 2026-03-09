@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Ryzer LTD — Angwenyiryzer. Website Design, Graphics, Programming, Software Sales, Digital Marketing & POS Systems in Nairobi, Kenya." />
+    <title>Angwenyiryzer — Ryzer LTD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- ============ LOADER ============ -->
+    <div id="loader" role="status" aria-label="Loading">
+        <div class="loader-brand">RYZER LTD</div>
+        <div class="loader-tagline">Angwenyiryzer</div>
+        <div class="loader-bar">
+            <div class="loader-fill" id="loader-fill"></div>
+        </div>
+        <div class="loader-text" id="loader-text">Initializing Experience…</div>
+    </div>
+
+    <!-- ============ NAV ============ -->
+    <nav id="main-nav" aria-label="Main navigation">
+        <a class="nav-logo" href="#ch-hero">RYZER LTD</a>
+        <div class="nav-links">
+            <a href="#ch-design">Design</a>
+            <a href="#ch-code">Code</a>
+            <a href="#ch-software">Systems</a>
+            <a href="#ch-marketing">Marketing</a>
+            <a href="#ch-contact">Contact</a>
+        </div>
+        <button class="nav-burger" id="nav-burger" aria-label="Toggle menu">&#9776;</button>
+    </nav>
+
+    <!-- ============ CANVAS STAGE ============ -->
+    <div id="canvas-container" aria-hidden="true">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <!-- ============ CHAPTER PROGRESS DOTS ============ -->
+    <div id="chapter-dots" aria-label="Chapter navigation">
+        <button class="dot active" data-ch="0" aria-label="Chapter 0: Hero"></button>
+        <button class="dot" data-ch="1" aria-label="Chapter 1: Design"></button>
+        <button class="dot" data-ch="2" aria-label="Chapter 2: Code"></button>
+        <button class="dot" data-ch="3" aria-label="Chapter 3: Systems"></button>
+        <button class="dot" data-ch="4" aria-label="Chapter 4: Marketing"></button>
+        <button class="dot" data-ch="5" aria-label="Chapter 5: Contact"></button>
+    </div>
+
+    <!-- ============ SCROLL JOURNEY ============ -->
+    <main id="scroll-journey">
+
+        <!-- Hero -->
+        <section class="chapter" id="ch-hero" data-chapter="0">
+            <div class="chapter-content hero-content">
+                <div class="eyebrow reveal-item">Ryzer LTD · Nairobi, Kenya</div>
+                <h1 class="mega-title reveal-item">Angwenyi<span class="highlight">ryzer</span></h1>
+                <p class="chapter-sub reveal-item">Where digital innovation meets unstoppable creativity</p>
+                <div class="service-pills reveal-item">
+                    <span class="pill">Web Design</span>
+                    <span class="pill">Graphics</span>
+                    <span class="pill">Programming</span>
+                    <span class="pill">Software</span>
+                    <span class="pill">Marketing</span>
+                    <span class="pill">POS Systems</span>
+                </div>
+                <div class="scroll-hint reveal-item">
+                    <span>Scroll to explore</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 1: Design -->
+        <section class="chapter" id="ch-design" data-chapter="1">
+            <div class="chapter-content left-panel">
+                <div class="eyebrow chapter-num reveal-item">01 / Design</div>
+                <h2 class="chapter-title reveal-item">Website &amp;<br />Graphics Design</h2>
+                <p class="chapter-body reveal-item">We craft pixel-perfect digital experiences that captivate your
+                    audience and communicate your brand's story with clarity, elegance, and lasting impact.</p>
+                <ul class="feature-list reveal-item">
+                    <li>Logo &amp; Brand Identity</li>
+                    <li>UI/UX Web Design</li>
+                    <li>Print &amp; Social Media Graphics</li>
+                    <li>Motion Graphics &amp; Animation</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter 2: Code -->
+        <section class="chapter" id="ch-code" data-chapter="2">
+            <div class="chapter-content right-panel">
+                <div class="eyebrow chapter-num reveal-item">02 / Build</div>
+                <h2 class="chapter-title reveal-item">Programming<br />&amp; Coding</h2>
+                <p class="chapter-body reveal-item">From bespoke web applications to enterprise-grade software — we
+                    engineer robust, scalable, and blazing-fast solutions that power your business forward.</p>
+                <ul class="feature-list reveal-item">
+                    <li>Custom Web Applications</li>
+                    <li>Mobile App Development</li>
+                    <li>API &amp; Backend Systems</li>
+                    <li>E-Commerce Platforms</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter 3: Software & POS -->
+        <section class="chapter" id="ch-software" data-chapter="3">
+            <div class="chapter-content left-panel">
+                <div class="eyebrow chapter-num reveal-item">03 / Systems</div>
+                <h2 class="chapter-title reveal-item">Software Sales<br />&amp; POS Systems</h2>
+                <p class="chapter-body reveal-item">Empower your business with cutting-edge Point of Sale systems and
+                    premium licensed software solutions — installed, configured, and supported by our expert team.</p>
+                <ul class="feature-list reveal-item">
+                    <li>POS Installation &amp; Support</li>
+                    <li>Licensed Software Sales</li>
+                    <li>System Integration &amp; Automation</li>
+                    <li>IT Consulting &amp; Support</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter 4: Marketing -->
+        <section class="chapter" id="ch-marketing" data-chapter="4">
+            <div class="chapter-content right-panel">
+                <div class="eyebrow chapter-num reveal-item">04 / Amplify</div>
+                <h2 class="chapter-title reveal-item">Digital<br />Marketing</h2>
+                <p class="chapter-body reveal-item">We amplify your brand's voice across all digital channels — driving
+                    engagement, growing your audience, and converting leads into loyal, returning customers.</p>
+                <ul class="feature-list reveal-item">
+                    <li>Social Media Management</li>
+                    <li>SEO &amp; Content Strategy</li>
+                    <li>Paid Ads &amp; Google Analytics</li>
+                    <li>Email &amp; Influencer Campaigns</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter 5: Contact + Loop -->
+        <section class="chapter" id="ch-contact" data-chapter="5">
+            <div class="chapter-content center-panel">
+                <div class="eyebrow reveal-item">Let's Create Together</div>
+                <h2 class="chapter-title reveal-item">Start Your<br />Journey</h2>
+                <p class="chapter-body reveal-item" style="max-width:540px;margin:0 auto 2.5rem;">
+                    Ready to elevate your brand? Reach out to the Ryzer LTD team today — we're based in Nairobi and
+                    serve clients across Kenya and beyond.
+                </p>
+                <div class="contact-grid reveal-item">
+                    <a href="tel:+254720646974" class="contact-card" id="contact-phone">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-label">Call Us</div>
+                        <div class="contact-value">+254 720 646 974</div>
+                    </a>
+                    <a href="mailto:ryzeranimations@gmail.com" class="contact-card" id="contact-email">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-label">Email Us</div>
+                        <div class="contact-value">ryzeranimations@gmail.com</div>
+                    </a>
+                    <div class="contact-card" id="contact-location">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-label">Find Us</div>
+                        <div class="contact-value">Fedha, Embakasi<br />Nairobi, Kenya</div>
+                    </div>
+                </div>
+                <p class="loop-hint reveal-item">↑ The journey never ends…</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>

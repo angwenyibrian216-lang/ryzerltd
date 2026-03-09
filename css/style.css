@@ -1,0 +1,414 @@
+/* ============================================================
+   STYLE.CSS — RYZER LTD · ANGWENYIRYZER
+   Pioneer-style scroll-triggered CGI experience
+   ============================================================ */
+
+/* =================== RESET & ROOT =================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #020408;
+  --cyan:         #00F5FF;
+  --purple:       #8B5CF6;
+  --green:        #39FF14;
+  --gold:         #FFD700;
+  --pink:         #FF3CAC;
+  --orange:       #FF6B35;
+  --text:         #E8EDF5;
+  --muted:        rgba(232,237,245,0.5);
+  --glass-bg:     rgba(4,8,20,0.82);
+  --glass-border: rgba(0,245,255,0.14);
+  --font:         'Outfit', sans-serif;
+  --font-alt:     'Space Grotesk', sans-serif;
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: auto; overflow-x: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =================== LOADER =================== */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.loader-brand {
+  font-family: var(--font-alt);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: var(--cyan);
+  text-shadow: 0 0 40px var(--cyan), 0 0 80px rgba(0,245,255,0.3);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.loader-tagline {
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.loader-bar {
+  width: 280px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  border-radius: 99px;
+  transition: width 0.15s linear;
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.loader-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 30px var(--cyan); }
+  50%       { text-shadow: 0 0 60px var(--cyan), 0 0 120px rgba(0,245,255,0.25); }
+}
+
+/* =================== CANVAS =================== */
+#canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#three-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* =================== NAV =================== */
+#main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 4rem;
+  background: linear-gradient(180deg, rgba(2,4,8,0.9) 0%, transparent 100%);
+  backdrop-filter: blur(2px);
+}
+
+.nav-logo {
+  font-family: var(--font-alt);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.28em;
+  color: var(--cyan);
+  text-decoration: none;
+  text-shadow: 0 0 20px rgba(0,245,255,0.5);
+  transition: text-shadow 0.3s;
+}
+.nav-logo:hover { text-shadow: 0 0 40px var(--cyan); }
+
+.nav-links { display: flex; gap: 2.5rem; }
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* =================== SCROLL JOURNEY =================== */
+#scroll-journey {
+  position: relative;
+  z-index: 10;
+}
+
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 5vw 4rem;
+}
+
+/* ---- Chapter Content Glass Panels ---- */
+.chapter-content {
+  max-width: 580px;
+  padding: 3.5rem 3rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 12px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  opacity: 0;
+  transform: translateY(70px);
+}
+
+.chapter-content.left-panel  { margin-left: 0; }
+.chapter-content.right-panel { margin-left: auto; }
+.chapter-content.center-panel{
+  margin: 0 auto;
+  max-width: 940px;
+  text-align: center;
+}
+
+/* Hero: no glass card */
+.hero-content {
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  max-width: 780px;
+}
+
+/* ---- Typography ---- */
+.eyebrow {
+  font-family: var(--font-alt);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 1.1rem;
+}
+.chapter-num { color: var(--purple); }
+
+.mega-title {
+  font-size: clamp(3.5rem, 12vw, 9.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.6rem;
+}
+.word { display: block; }
+.highlight {
+  color: var(--cyan);
+  text-shadow: 0 0 80px rgba(0,245,255,0.4), 0 0 160px rgba(0,245,255,0.15);
+}
+
+.chapter-title {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.4rem;
+}
+
+.chapter-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+}
+
+.chapter-body {
+  font-size: 0.98rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+/* ---- Service Pills (hero) ---- */
+.service-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+.pill {
+  font-family: var(--font-alt);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(0,245,255,0.3);
+  border-radius: 99px;
+  color: var(--cyan);
+  background: rgba(0,245,255,0.06);
+  transition: all 0.3s;
+}
+.pill:hover {
+  background: rgba(0,245,255,0.15);
+  box-shadow: 0 0 16px rgba(0,245,255,0.2);
+}
+
+/* ---- Feature List ---- */
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.92rem;
+  font-family: var(--font-alt);
+  color: var(--text);
+}
+.feature-list li::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  flex-shrink: 0;
+}
+
+/* ---- Scroll Hint ---- */
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.scroll-hint span {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-arrow {
+  width: 2px;
+  height: 44px;
+  background: linear-gradient(180deg, var(--cyan), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; transform: scaleY(0.6); }
+  50%       { opacity: 1;    transform: scaleY(1);   }
+}
+
+/* ---- Contact Grid ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0 2rem;
+}
+.contact-card {
+  padding: 2rem 1.5rem;
+  background: rgba(0,245,255,0.04);
+  border: 1px solid rgba(0,245,255,0.18);
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+  transition: all 0.35s var(--ease-out);
+}
+a.contact-card { cursor: pointer; }
+.contact-card:hover {
+  background: rgba(0,245,255,0.1);
+  border-color: var(--cyan);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,245,255,0.15);
+}
+.contact-icon  { font-size: 2rem; margin-bottom: 0.75rem; }
+.contact-label {
+  font-family: var(--font-alt);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+}
+.contact-value { font-size: 0.85rem; line-height: 1.55; color: var(--text); }
+
+/* ---- Loop Hint ---- */
+.loop-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  animation: floatHint 2.8s ease-in-out infinite;
+}
+@keyframes floatHint {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50%       { opacity: 1;   transform: translateY(-7px); }
+}
+
+/* =================== CHAPTER DOTS =================== */
+#chapter-dots {
+  position: fixed;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-out);
+  padding: 0;
+}
+.dot.active {
+  background: var(--cyan);
+  box-shadow: 0 0 14px var(--cyan);
+  transform: scale(1.45);
+}
+
+/* =================== CHAPTER COLOUR THEMES =================== */
+/* These are toggled via JS by adding/removing the data-chapter on body */
+/* Handled dynamically via CSS custom properties update from JS */
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 900px) {
+  #main-nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .chapter { padding: 5rem 1.25rem 3rem; }
+  .chapter-content { padding: 2.5rem 1.75rem; }
+  .chapter-content.right-panel { margin-left: 0; }
+  .contact-grid { grid-template-columns: 1fr; gap: 1rem; }
+  #chapter-dots { right: 0.6rem; }
+}
+
+@media (max-width: 480px) {
+  .mega-title { font-size: clamp(3rem, 18vw, 5rem); }
+  .chapter-title { font-size: clamp(1.8rem, 8vw, 3rem); }
+  .service-pills { gap: 0.4rem; }
+}
